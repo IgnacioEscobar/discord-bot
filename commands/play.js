@@ -1,5 +1,8 @@
 const {GuildMember} = require('discord.js');
 const {QueryType} = require('discord-player');
+const {AudioFilters} = require("discord-player");
+
+AudioFilters.define("TestFilter", "apulsator=hz=0.128");
 
 module.exports = {
   name: 'play',
@@ -53,11 +56,10 @@ module.exports = {
         metadata: interaction.channel,
       });
 
-      // Check this.
-      queue.setFilters({ "earrape": true });
-
       try {
         if (!queue.connection) await queue.connect(interaction.member.voice.channel);
+
+        queue.setFilters({ "TestFilter": true });
       } catch {
         void player.deleteQueue(interaction.guildId);
         return void interaction.followUp({
