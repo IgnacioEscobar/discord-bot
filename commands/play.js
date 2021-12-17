@@ -2,7 +2,7 @@ const {GuildMember} = require('discord.js');
 const {QueryType} = require('discord-player');
 const {AudioFilters} = require("discord-player");
 
-AudioFilters.define("TestFilter", "apulsator=hz=0.128");
+AudioFilters.define("CustomAudioNormalization", "loudnorm");
 
 module.exports = {
   name: 'play',
@@ -59,7 +59,7 @@ module.exports = {
       try {
         if (!queue.connection) await queue.connect(interaction.member.voice.channel);
 
-        queue.setFilters({ "TestFilter": true });
+        queue.setFilters({ "CustomAudioNormalization": true });
       } catch {
         void player.deleteQueue(interaction.guildId);
         return void interaction.followUp({
