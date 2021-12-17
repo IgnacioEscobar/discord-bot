@@ -53,6 +53,9 @@ module.exports = {
         metadata: interaction.channel,
       });
 
+      // Check this.
+      queue.setFilters({ "earrape": true });
+
       try {
         if (!queue.connection) await queue.connect(interaction.member.voice.channel);
       } catch {
